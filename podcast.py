@@ -48,7 +48,7 @@ for filename in files:
     <item>
         <pubDate>{pubDate}</pubDate>
         <title>{escape(Path(filename).stem.replace('_',' '))}</title>
-        <description/>
+        <description>{bitrate} kbps {filename[-3:].upper()}</description>
         <guid isPermaLink="true">{args.urlbase+quote(filename)}</guid>
         <enclosure url="{args.urlbase+quote(filename)}" type="{filetype}" length="{os.path.getsize(filename)}"/>
         <itunes:explicit>no</itunes:explicit>
@@ -56,7 +56,6 @@ for filename in files:
         <itunes:episode>{i}</itunes:episode>
         <itunes:season>1</itunes:season>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:subtitle>{bitrate} kbps {filename[-3:].upper()}</itunes:subtitle>
     </item>'''
     i+=1
 
@@ -76,12 +75,11 @@ print(f'''<?xml version="1.0" encoding="UTF-8"?>
     <itunes:summary>{args.description}</itunes:summary>      
     <itunes:category text="Music"/>
     <itunes:image href="{args.image}"/>
-    <podcast:locked owner="{args.owner}">no</podcast:locked>
+    <podcast:locked owner="{args.owner}">yes</podcast:locked>
     <podcast:guid>{uuid.uuid4()}</podcast:guid>
     <image>
         <url>{args.image}</url>
         <title>{args.name}</title>
-        <link>{args.urlbase}></link>
     </image>{items}
   </channel>
 </rss>''')
