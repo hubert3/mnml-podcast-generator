@@ -16,6 +16,7 @@ parser.add_argument('-n', '--name', help='Podcast name', default='My podcast')
 parser.add_argument('-l', '--link', help='Podcast link', default='https://example.com/podcast')
 parser.add_argument('-d', '--description', help='Podcast description', default='Welcome to my podcast')
 parser.add_argument('-o', '--owner', help='Podcast owner email address', default='podcast@example.com')
+parser.add_argument('-a', '--author', help='Podcast author', default='Anonymous')
 parser.add_argument('-i', '--image', help='Cover image', default='https://example.com/podcast/cover.jpg')
 parser.add_argument('-p', '--print', help='Print episode order only', action='store_true')
 parser.add_argument('-s', '--special', help='Apply special episode ordering', action='store_true')
@@ -71,7 +72,7 @@ print(f'''<?xml version="1.0" encoding="UTF-8"?>
     <itunes:owner>
       <itunes:email>{args.owner}</itunes:email>
     </itunes:owner>
-    <itunes:author>Anonymous</itunes:author>
+    <itunes:author>{args.author}</itunes:author>
     <itunes:summary>{args.description}</itunes:summary>      
     <itunes:category text="Music"/>
     <itunes:image href="{args.image}"/>
