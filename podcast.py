@@ -3,7 +3,7 @@
 import uuid
 import os, sys
 import argparse
-import subprocess
+import subprocess, string
 from glob import glob
 from pathlib import Path
 from urllib.parse import quote
@@ -42,7 +42,7 @@ for filename in files:
     if filename[-3:].lower() == 'm4a':
         filetype = 'audio/mp4'
     duration_in_seconds = int(float(subprocess.check_output(['ffprobe', '-i', filename, '-show_entries', 'format=duration', '-v', 'quiet', '-of', 'csv=p=0']).strip().decode()))
-    bitrate = round(int(subprocess.check_output(['ffprobe', '-v', '0', '-select_streams', 'a:0', '-show_entries', 'stream=bit_rate' ,'-of', 'compact=p=0:nk=1', filename]))/1000)
+    bitrate = round(int(subprocess.check_output(['ffprobe', '-v', '0', '-select_streams', 'a:0', '-show_entries', 'stream=bit_rate' ,'-of', 'compact=p=0:nk=1', filename]).decode().replace('\n','').replace('|',''))/1000)
     items += f'''
     <item>
         <pubDate>{pubDate}</pubDate>
